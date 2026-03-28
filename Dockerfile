@@ -12,5 +12,7 @@ RUN apk add --no-cache tzdata
 
 EXPOSE 1688/tcp
 
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD nc -z localhost 1688 || exit 1
+
 CMD ["/vlmcsd", "-D", "-d", "-t", "3", "-e", "-v"]
 
